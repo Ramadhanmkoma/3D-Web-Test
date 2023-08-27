@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import * as THREEE from "three/examples/jsm/controls/OrbitControls";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 let scene, camera, renderer, cube, sphereCamera;
 const windWidth = window.innerWidth;
@@ -19,7 +19,10 @@ function init() {
   renderer.setSize(windWidth, windHeight);
   document.body.appendChild(renderer.domElement);
 
-  let controls = new THREEE.OrbitControls(camera, renderer.domElement);
+  let controls = new OrbitControls(camera, renderer.domElement);
+  controls.addEventListener("change", renderer);
+  controls.enableDamping = true;
+    controls.enablePan = false;
   controls.enableZoom = false;
 
   let urls = [
@@ -38,7 +41,7 @@ function init() {
   // apply sphere camera at the same position as the sphere
   sphereCamera.position.set(0, 100, 0);
   // add sphere camera to the scene
-  // scene.add(sphereCamera);
+  scene.add(sphereCamera);
   // creating a sphere geometry and sphere material
   let sphereMaterial = new THREE.MeshBasicMaterial({
     // envMap: sphereCamera.renderTarget
@@ -48,21 +51,28 @@ function init() {
   sphere.position.set(0, 100, 0);
   // scene.add(sphere);
 
+  //light
+  const light = new THREE.PointLight(0xffffff, 1, 100);
+  light.position.set(0, 10, 10);
+  scene.add(light);
+
   render();
-  window.addEventListener("resize", onWindowsResize());
   audicity.play();
 }
 
 function render() {
   renderer.render(scene, camera);
-  // sphereCamera.updateCubeMap(renderer,scene);
+  // sphereCamera.update(renderer,scene);
   requestAnimationFrame(render);
 }
 
-function onWindowsResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  renderer.setSize(windWidth, windHeight);
-}
+// window.addEventListener("resize", () => {
+//   windWidth = window.innerWidth;
+//   windHeight = window.innerHeight;
+//   camera.aspect = windWidth / windHeight;
+//   camera.updateProjectionMatrix();
+//   renderer.setSize(windWidth, windHeight);
+// });
 
 init();
 

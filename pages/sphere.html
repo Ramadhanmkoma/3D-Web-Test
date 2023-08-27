@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Sphere</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="/css/sphere.css">
+  </head>
+  <body>
+    <div
+      class="sphere"
+      style="
+        font-family: 'Poppins';
+        text-align: center;
+        position: fixed;
+        padding: 1em;
+        inset: 0 0 auto 0;
+        color: #fff;
+      "
+    >
+      <h1>Virtual Sphere</h1>
+      <p style="color: rgb(156, 206, 255)">
+        <small>Powered by TechSwahili</small>
+      </p>
+    </div>
+    <div
+      class="pause"
+      id="pause"
+      style="
+        position: fixed;
+        padding: 1em;
+        box-sizing: border-box;
+        inset: auto auto 1em 1em;
+        background-color: #0008;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      "
+    >
+      <h2
+        id="p-icon"
+        style="
+          font-family: 'Poppins';
+          color: #fff;
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          letter-spacing: 0.15em;
+        "
+      >
+       <a href="/index.html"> &looparrowleft;</a>
+      </h2>
+    </div>
+    <canvas class="webgl"></canvas>
+    <script type="module" src="/public/js/sphere.js"></script>
+  </body>
+</html>
