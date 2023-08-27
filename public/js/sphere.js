@@ -7,16 +7,18 @@ let scene, camera, geometry, controls, renderer, mesh;
 let windWidth = window.innerWidth;
 let windHeight = window.innerHeight;
 const audicity = document.createElement("audio");
+let isWireFrameEnabled = false;
 
 const init = () => {
   // Creating a scene
   scene = new THREE.Scene();
 
   // Create Our Sphere geometry
-  geometry = new THREE.SphereGeometry(0.78, 64, 64);
+  geometry = new THREE.SphereGeometry(0.9, 64, 64);
   // apply a skin
   const material = new THREE.MeshStandardMaterial({
     color: new THREE.Color(79, 80, 250),
+    wireframe: isWireFrameEnabled,
     roughness: 0.25,
   });
 
@@ -52,6 +54,21 @@ const init = () => {
   renderer.render(scene, camera);
 
   onWindowsResize();
+
+  // Activate Wireframe
+  const wireframeBtn = document.getElementById("wireframe");
+
+  wireframeBtn.addEventListener("click", () => {
+    if (isWireFrameEnabled) {
+      isWireFrameEnabled = false;
+      wireframeBtn.setAttribute("title", "Activate WireFrame");
+      material.wireframe = isWireFrameEnabled;
+    } else {
+      isWireFrameEnabled = true;
+      wireframeBtn.setAttribute("title", "Diactivate WireFrame");
+      material.wireframe = isWireFrameEnabled;
+    }
+  });
 };
 
 init();
