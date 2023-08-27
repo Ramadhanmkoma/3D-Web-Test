@@ -22,8 +22,10 @@ function init() {
   let controls = new OrbitControls(camera, renderer.domElement);
   controls.addEventListener("change", renderer);
   controls.enableDamping = true;
-    controls.enablePan = false;
+  controls.enablePan = false;
   controls.enableZoom = false;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 5;
 
   let urls = [
     "sun11s.png",
@@ -81,10 +83,12 @@ const pp = window.document.getElementById("pause");
 pp.addEventListener("click", function () {
   if (isPaused) {
     document.getElementById("p-icon").innerHTML = `II`;
+    pp.setAttribute('title', 'pause');
     audicity.play();
     isPaused = false;
   } else {
     document.getElementById("p-icon").innerHTML = `&looparrowright;`;
+    pp.setAttribute('title', 'play');
     audicity.pause();
     isPaused = true;
   }
