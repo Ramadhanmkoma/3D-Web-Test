@@ -1,7 +1,7 @@
-import * as THREE from "../../node_modules/three/build/three.module.js";
-import { OrbitControls } from "../../node_modules/three/examples/jsm/controls/OrbitControls.js";
+import * as THREE from "./three.module.js";
+import { OrbitControls } from "./OrbitControls.js";
 // import "/css/sphere.css";
-import { gsap } from "../../node_modules/gsap/gsap-core.js";
+import { gsap } from "./gsap-core.js";
 
 let scene, camera, geometry, controls, renderer, mesh;
 let windWidth = window.innerWidth;
