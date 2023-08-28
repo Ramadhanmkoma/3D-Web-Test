@@ -13,11 +13,20 @@ const init = () => {
   // Creating a scene
   scene = new THREE.Scene();
 
+  // creating a sphere camera
+  const sphereCamera = new THREE.CubeCamera(0.1, 1000, 50);
+  // apply sphere camera at the same position as the sphere
+  sphereCamera.position.set(0, 100, 0);
+  // add sphere camera to the scene
+  scene.add(sphereCamera);
+
+  sphereCamera.updateMatrix()
+
   // Create Our Sphere geometry
   geometry = new THREE.SphereGeometry(0.9, 64, 64);
   // apply a skin
   const material = new THREE.MeshStandardMaterial({
-    color: new THREE.Color(79, 80, 250),
+    color: new THREE.Color(79, 200, 250),
     wireframe: isWireFrameEnabled,
     roughness: 0.25,
   });
@@ -120,3 +129,23 @@ window.addEventListener("mousemove", function (e) {
     audicity.play();
   }
 });
+
+function enablelight2() {
+  const light2 = new THREE.PointLight(0x3399FF, 1, 100);
+  let isEnabled = false;
+  if (isEnabled) {
+    // enLight2.removeEventListener("click");
+    // light2.position.set(0, 0, 0);
+    // light2.intensity = 1.25;
+    scene.remove(light2);
+    isEnabled = false;
+  } else {
+    light2.position.set(0, -10, -10);
+    light2.intensity = 1.25;
+    scene.add(light2);
+    isEnabled = true;
+  }
+}
+
+const enLight2 = document.getElementById("light2");
+enLight2.addEventListener("click", enablelight2);

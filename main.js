@@ -9,13 +9,14 @@ let isPaused = false;
 
 function init() {
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(70, windWidth / windHeight, 1, 5000);
+  camera = new THREE.PerspectiveCamera(70, windWidth / windHeight, 0.1, 1000);
   //place camera away from the center
   camera.position.set(0, 400, 1000);
 
   audicity.setAttribute("src", "textures/Project_Utopia.mp3");
   audicity.setAttribute("loop", "");
   renderer = new THREE.WebGLRenderer({ antialias: true });
+
   renderer.setSize(windWidth, windHeight);
   document.body.appendChild(renderer.domElement);
 
@@ -39,22 +40,26 @@ function init() {
   scene.background = loader.load(urls);
 
   // creating a sphere camera
-  sphereCamera = new THREE.CubeCamera(1, 1000, 500);
+  sphereCamera = new THREE.CubeCamera(0.1, 1000, 50);
   // apply sphere camera at the same position as the sphere
   sphereCamera.position.set(0, 100, 0);
   // add sphere camera to the scene
   scene.add(sphereCamera);
+
   // creating a sphere geometry and sphere material
-  let sphereMaterial = new THREE.MeshBasicMaterial({
-    // envMap: sphereCamera.renderTarget
+  let sphereMaterial = new THREE.MeshPhysicalMaterial({
+    color: new THREE.Color(0, 255, 83),
+    envMap: sphereCamera.renderTarget,
+    wireframe: true,
+    roughness: 0.25,
   });
-  let sphereGeometry = new THREE.SphereGeometry(350, 50, 50);
+  let sphereGeometry = new THREE.SphereGeometry(240, 60, 60);
   let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
   sphere.position.set(0, 100, 0);
-  // scene.add(sphere);
+  scene.add(sphere);
 
   //light
-  const light = new THREE.PointLight(0xffffff, 1, 100);
+  const light = new THREE.PointLight(0xffffff, 1.25, 100);
   light.position.set(0, 10, 10);
   scene.add(light);
 
@@ -64,7 +69,7 @@ function init() {
 
 function render() {
   renderer.render(scene, camera);
-  // sphereCamera.update(renderer,scene);
+  // sphereCamera.update(renderer, scene);
   requestAnimationFrame(render);
 }
 

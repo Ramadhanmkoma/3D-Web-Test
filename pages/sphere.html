@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="../avatar.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Virtual Sphere</title>
     <link rel="stylesheet" href="../style.css" />
@@ -89,6 +90,41 @@
         "
       >
        <a role="button"> &LeftDoubleBracket;&RightDoubleBracket;</a>
+      </h2>
+    </div>
+
+    <!-- enable light 2 -->
+    <div
+      class="light2"
+      id="light2"
+      style="
+        position: fixed;
+        padding: 1em;
+        box-sizing: border-box;
+        inset: auto auto 1em 9em;
+        background-color: rgba(0, 115, 255, 0.533);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      "
+      title="Activate Light"
+    >
+      <h2
+        id="light"
+        style="
+          font-family: 'Poppins';
+          color: #fff;
+          position: absolute;
+          width: 100%;
+          text-align: center;
+          letter-spacing: 0.15em;
+        "
+      >
+       <a role="button"> &napprox;</a>
       </h2>
     </div>
     <canvas class="webgl"></canvas>
