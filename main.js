@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
+import { FlyControls } from 'three/examples/jsm/controls/FlyControls'
 
 let scene, camera, renderer, cube, sphereCamera;
 const windWidth = window.innerWidth;
@@ -20,13 +22,17 @@ function init() {
   renderer.setSize(windWidth, windHeight);
   document.body.appendChild(renderer.domElement);
 
-  let controls = new OrbitControls(camera, renderer.domElement);
-  controls.addEventListener("change", renderer);
-  controls.enableDamping = true;
-  controls.enablePan = false;
-  controls.enableZoom = false;
-  controls.autoRotate = true;
-  controls.autoRotateSpeed = 5;
+    let controls = new OrbitControls(camera, renderer.domElement);
+    controls.addEventListener("change", renderer);
+    controls.enableDamping = true;
+    controls.enablePan = false;
+    controls.enableZoom = false;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 5;
+
+  let pointerLock = new PointerLockControls(camera, renderer.domElement);
+  pointerLock.addEventListener("change", renderer);
+  pointerLock.isLocked = true;
 
   let urls = [
     "sun11s.png",
