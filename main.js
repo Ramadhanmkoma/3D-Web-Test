@@ -121,3 +121,9 @@ pp.addEventListener("mouseout", function () {
   `;
 });
 
+window.document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const popup = document.querySelector('.popup');
+    popup.setAttribute('style', 'display: none');
+  }, 2000);
+});
