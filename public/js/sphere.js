@@ -169,6 +169,5 @@ window.document.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     const popup = document.querySelector('.popup');
     popup.setAttribute('style', 'display: none');
-  }, 3000);
-  
+  }, 2000);
 });
