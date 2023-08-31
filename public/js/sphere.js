@@ -1,14 +1,20 @@
 import * as THREE from "./three.module.js";
 import { OrbitControls } from "./OrbitControls.js";
+import { PointerLockControls } from "./PointerLockControls.js";
 // import "/css/sphere.css";
 import { gsap } from "./gsap-core.js";
+import * as dat from './dat.gui.module.js';
+
+// Debugging
+const gui = new dat.GUI();
 
 let scene, camera, geometry, controls, renderer, mesh;
 let windWidth = window.innerWidth;
 let windHeight = window.innerHeight;
 const audicity = document.createElement("audio");
 let isWireFrameEnabled = false;
-
+const textureLoader = new THREE.TextureLoader();
+const normalMap = textureLoader.load('./richard1.jpeg');
 
 // alert("dsa")
 const init = () => {
@@ -28,10 +34,13 @@ const init = () => {
   geometry = new THREE.SphereGeometry(0.9, 64, 64);
   // apply a skin
   const material = new THREE.MeshStandardMaterial({
-    color: new THREE.Color(79, 200, 250),
+    color: new THREE.Color(0x00ff83),
     wireframe: isWireFrameEnabled,
-    roughness: 0.25,
+    roughness: 0.2,
+    metalness: 0.9
   });
+
+  material.normalMap = normalMap;
 
   // comnine geometry and material
   mesh = new THREE.Mesh(geometry, material);
@@ -61,6 +70,10 @@ const init = () => {
   //   controls.screenSpacePanning = true;
   //   controls.enablePan = false;
   // controls.enableZoom = false;
+
+  // let pointerLockControl = new PointerLockControls(camera, renderer.domElement);
+  // pointerLockControl.addEventListener("change", renderer);
+  // pointerLockControl.isLocked = true;
 
   renderer.render(scene, camera);
 
@@ -151,3 +164,11 @@ function enablelight2() {
 
 const enLight2 = document.getElementById("light2");
 enLight2.addEventListener("click", enablelight2);
+
+window.document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const popup = document.querySelector('.popup');
+    popup.setAttribute('style', 'display: none');
+  }, 3000);
+  
+});

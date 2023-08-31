@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls";
-import { FlyControls } from 'three/examples/jsm/controls/FlyControls'
+import * as dat from 'dat.gui';
+// import { FlyControls } from 'three/examples/jsm/controls/FlyControls'
+
+// Debugging
+const gui = new dat.GUI();
 
 let scene, camera, renderer, cube, sphereCamera;
 const windWidth = window.innerWidth;
@@ -44,30 +48,6 @@ function init() {
   ];
   let loader = new THREE.CubeTextureLoader();
   scene.background = loader.load(urls);
-
-  // creating a sphere camera
-  sphereCamera = new THREE.CubeCamera(0.1, 1000, 50);
-  // apply sphere camera at the same position as the sphere
-  sphereCamera.position.set(0, 100, 0);
-  // add sphere camera to the scene
-  scene.add(sphereCamera);
-
-  // creating a sphere geometry and sphere material
-  let sphereMaterial = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color(0, 255, 83),
-    envMap: sphereCamera.renderTarget,
-    wireframe: true,
-    roughness: 0.25,
-  });
-  let sphereGeometry = new THREE.SphereGeometry(240, 60, 60);
-  let sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-  sphere.position.set(0, 100, 0);
-  scene.add(sphere);
-
-  //light
-  const light = new THREE.PointLight(0xffffff, 1.25, 100);
-  light.position.set(0, 10, 10);
-  scene.add(light);
 
   render();
   audicity.play();
